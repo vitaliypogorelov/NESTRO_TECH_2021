@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    {% block title %}<title>Welcome NESTRO TECH system</title>{% endblock %}
+    <style>
+      body {
+        padding-top: 3rem;
+      }
+      .blog-footer {
+        padding: 2.5rem 0;
+        color: #727272;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-top: .05rem solid #e5e5e5;
+      }
+    </style>
+  </head>
+  <body>
+    {% block nav %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">NESTRO TECH 2021</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Диаграмма устойчивовсти</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                Управление моделью
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Модель графа устойчивости</a></li>
+                <li><a class="dropdown-item" href="#">Функции преобразования метрик</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item disabled" href="#" >Справка</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Панель администратора</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control mr-2" type="search" placeholder="" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Найти</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    {% endblock  %}
+
+    {% block content %}
+    <main class="container">
+      <div class="text-center py-5 px-3">
+        <h1>СИСТЕМА МОНИТОРИНГА ПОКАЗАТЕЛЕЙ РАБОЧИХ ПРОЦЕССОВ</h1>
+        Прототип системы мониторинга показателей устойчивости рабочих процессов.</br>
+        Программное решение кейса, реализованого в рамках IT-чемпионата нефтяной отрасли 2021
+
+      </div><!-- row -->
+    </main>
+    {% endblock  %}
+
+    <footer class="blog-footer py-3">
+      <p>© 2021 NESTRO TECH</p>
+      <p>
+        <a href="/">Вернуться к началу</a>
+      </p>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- Popper.js first, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  </body>
+</html>
+
