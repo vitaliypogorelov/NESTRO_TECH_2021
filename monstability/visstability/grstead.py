@@ -37,10 +37,14 @@ class GStead:
         """ загрузка графа из файла GEXF """
         self.G = nx.read_gexf(path)
 
-        self.nodesid_metric.clear()
-        for node in self.G.nodes.data():    # обход по нода
-            if node[1]['type'] == TYPE_METRIC:    # тип ноды 'metric'
-                self.nodesid_metric.append(node[0])   # добавляем id ноды в список нод метрик
+        # self.nodesid_metric.clear()
+        # for node in self.G.nodes.data():    # обход по нода
+        #     if node[1]['type'] == TYPE_METRIC:    # тип ноды 'metric'
+        #         self.nodesid_metric.append(node[0])   # добавляем id ноды в список нод метрик
+
+    def write_gexf(self, path):
+        """ выгрузка графа в файла GEXF """
+        nx.write_gexf(self.G, path)
 
     def calc_node_stead(self, node_id):
         """ пересчет устойчивости ноды """
@@ -90,7 +94,8 @@ class GStead:
         self.G.nodes[node_id]['access'] = access  # обновление доступности текущей ноды
 
 if __name__ == '__main__':
-    gs = GStead()
-    gs.read_gexf("monstability_model_1.xml")
-#    gs.calc_metrics_stead()
-    gs.calc_node_stead('2')
+    pass
+    # gs = GStead()
+    # gs.read_gexf("monstability_model_1.xml")
+    # gs.calc_metrics_stead()
+    # gs.calc_node_stead('2')

@@ -10,7 +10,7 @@ class NodesViewSet(viewsets.ModelViewSet):
 
     #permission_classes = [ObjectPermissions, ]
     serializer_class = NodesSerializer
-    queryset = Nodes.objects.all()
+    queryset = Nodes.objects.order_by('id')
 
 ##### Edges #####
 class EdgesViewSet(viewsets.ModelViewSet):
@@ -18,4 +18,4 @@ class EdgesViewSet(viewsets.ModelViewSet):
 
     #permission_classes = [ObjectPermissions, ]
     serializer_class = EdgesSerializer
-    queryset = Edges.objects.all()
+    queryset = Edges.objects.order_by('id')

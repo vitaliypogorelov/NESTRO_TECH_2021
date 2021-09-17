@@ -17,6 +17,7 @@ class Nodes(models.Model):
         ('metric', 'метрика'),
         ('or', 'И'),
         ('and', 'ИЛИ'),
+        ('true', 'единица'),
         ('service', 'сервис'),
     ]
     LAYER_TYPE = [
@@ -27,7 +28,7 @@ class Nodes(models.Model):
         ('bp', 'Бизнес-процесс'),
         ('ot', 'Прочее'),
     ]
-    id_gr= models.CharField('id',
+    id_gr= models.CharField('idgr',
                             help_text='id вершины',
                             max_length=10,
                             )
@@ -38,7 +39,7 @@ class Nodes(models.Model):
     type_gr = models.CharField('type',
                                help_text='Тип вершины графа',
                                max_length=10,
-                               choices=NODES_TYPE
+                               choices=NODES_TYPE,
                                )
     layer = models.CharField('layer',
                               help_text='Бизнес-слой',
@@ -52,6 +53,10 @@ class Nodes(models.Model):
     stead = models.FloatField('stead',
                               help_text='Устойчивость',
                               )
+    costdown = models.FloatField('costdown',
+                              help_text='Стоимость простоя',
+                              )
+
     def __str__(self):
         return f"{self.label_gr} ({self.id_gr})"
 
@@ -62,7 +67,7 @@ class Nodes(models.Model):
 class Edges(models.Model):
     """ ребра графа устойчивости"""
 
-    id_gr= models.CharField('id',
+    id_gr= models.CharField('idgr',
                             help_text='id ребра',
                             max_length=10,
                             )
