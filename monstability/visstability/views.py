@@ -1,5 +1,13 @@
 from django.shortcuts import render
 
 def index(request):
-    context = {}    #с помощью словаря будем передать модель и форму в шаблон HTML
+    context = {}    #словарь для передачи контента в шаблон HTML
     return render(request, 'index.html', context)
+
+def diagram(request):
+    context = {}
+    return render(request, 'diagram.html', context)
+
+def model(request):
+    context = {}
+    return render(request, 'model.html', context)

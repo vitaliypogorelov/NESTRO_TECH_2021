@@ -1,56 +1,12 @@
 {% extends "base_generic.html" %}
-{% block title %}<title>Welcome NESTRO TECH system</title>{% endblock %}
-{% block nav %}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">NESTRO TECH 2021</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-      {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">Диаграмма устойчивовсти</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            Управление моделью
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Модель графа устойчивости</a></li>
-            <li><a class="dropdown-item" href="#">Функции преобразования метрик</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item disabled" href="#" >Справка</a></li>
-          </ul>
-        </li>
-        {% if user.is_staff %}
-        <li class="nav-item">
-          <a class="nav-link" href="/admin">Панель администратора</a>
-        </li>
-        {% endif %}
-      {% endif %}
-      </ul>
-      {% if user.is_authenticated %}
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            <strong class="text-gray-dark">
-              {{ user.get_username }}
-            </strong>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Профиль</a></li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}" >Выход</a></li>
-          </ul>
-        </li>
-      </ul>
-      {% else %}
-      <a class="btn btn-outline-secondary" href="{% url 'login' %}?next=/nestro">Войти</a>
-      {% endif %}
-    </div>
-  </div>
-</nav>
-{% endblock  %}
+    {% block content %}
+    <main class="container">
+      <div class="text-center py-5 px-3">
+        <h1>СИСТЕМА МОНИТОРИНГА ПОКАЗАТЕЛЕЙ УСТОЙЧИВОСТИ РАБОЧИХ ПРОЦЕССОВ</h1>
+        Прототип системы мониторинга показателей устойчивости рабочих процессов.</br>
+        Программное решение кейса, реализованого в рамках IT-чемпионата нефтяной отрасли 2021
+      </div>
+    </main>
+    {% endblock  %}
 
 

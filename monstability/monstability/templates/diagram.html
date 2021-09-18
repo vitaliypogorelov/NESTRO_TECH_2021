@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+    {% load static %}
+    {% block css %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% endblock %}
+    {% block content %}
+    <main class="container">
+      <div class="text-center py-4 px-3">
+        <h1>ДИАГРАММА ЗАВИСИМОСТИ ПАКАЗАТЕЛЕЙ РАБОЧЕГО ПРОЦЕССА</h1>
+      </div>
+      <div id="chart"></div>
+    </main>
+    {% endblock  %}
+    {% block jscript %}
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="{% static 'js/base_app.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    {% endblock  %}

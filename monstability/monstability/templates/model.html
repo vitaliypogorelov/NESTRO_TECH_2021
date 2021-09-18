@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+    {% load static %}
+    {% block content %}
+    <main class="container">
+      <div class="text-center py-5 px-3">
+        <h1>МОДЕЛЬ ИСХОДНОГО ГРАФА ЗАВИСИМОСТИ</h1>
+      </div>
+      <img src="{% static 'diagram.png' %}" class="img-responsive">
+    </main>
+    {% endblock  %}
