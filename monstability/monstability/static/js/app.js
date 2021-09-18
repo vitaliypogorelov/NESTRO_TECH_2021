@@ -543,7 +543,7 @@ var HttpClient = function() {
 //
 var exampleNodes = null;
 var exampleLinks = null;
-var URL_Host = 'http://127.0.0.1:8000/api/v1';
+var URL_Host = 'http://dh.bitc.ru:8021/api/v1';
 function getData() {
   //var jsnArray = httpHttpRequest();
   var client = new HttpClient();
