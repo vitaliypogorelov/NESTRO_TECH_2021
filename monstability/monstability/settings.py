@@ -95,11 +95,22 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'msdb',
         'USER': 'mseuser',
-        'PASSWORD': 'P@ssw0rd',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'PASSWORD': os.environ.get("DBPASSWORD"),
+        'HOST': os.environ.get("DBHOST"),
+        'PORT': os.environ.get("DBPORT"),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'msdb',
+#         'USER': 'mseuser',
+#         'PASSWORD': 'P@ssw0rd',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
