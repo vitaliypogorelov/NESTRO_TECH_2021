@@ -32,7 +32,8 @@ SECRET_KEY = 'django-insecure-i&+d&x1(n)p_%2wybh(ww3^^syx=anm3wqujjwz%^j7zawd#e8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS")
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Добавление каталога для размещения шаблонов
 PROJECT_ROOT = os.path.dirname(__file__)

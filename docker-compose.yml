@@ -1,11 +1,13 @@
 version: '3.7'
 
 services:
-  itweb:
+  mstweb:
     build: ./
     command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DJANGO_ALLOWED_HOSTS=dh.bitc.ru
     volumes:
-      - .:/usr/src/app/
+      - it_data:/usr/src/app/
     ports:
       - 8021:8000
     networks:
@@ -14,4 +16,5 @@ networks:
   qre_net:
     external: true
     name: qrestimatenet
-
+volumes:
+  mst_data:
