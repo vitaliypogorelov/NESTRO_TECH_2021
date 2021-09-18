@@ -39,8 +39,8 @@ var OPACITY = {
 var formatNumber = function (d) {
   var numberFormat = d3.format(",.0f"); // zero decimal places
     //  return "weight " + numberFormat(d);
-      return "weight " + d;
-},
+      return "\n Влияние, %: "  + d*100;
+    },
 
 formatFlow = function (d) {
   var flowFormat = d3.format(",.0f"); // zero decimal places with sign
@@ -264,9 +264,9 @@ function update () {
     if (!isTransitioning) {
       showTooltip().select(".value").text(function () {
         if (d.direction > 0) {
-          return d.source.name + " to " + d.target.name + "\n" + formatNumber(d.value);
+          return d.source.name + " > " + d.target.name + "\n" + formatNumber(d.value);
         }
-        return d.target.name + " from " + d.source.name + "\n" + formatNumber(d.value);
+        return d.target.name + " < " + d.source.name + "\n" + formatNumber(d.value);
       });
 
       d3.select(this)
@@ -312,14 +312,13 @@ function update () {
   node = svg.select("#nodes").selectAll(".node")
       .data(biHiSankey.collapsedNodes(), function (d) { return d.id; });
 
-
   node.transition()
     .duration(TRANSITION_DURATION)
     .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; })
     .style("opacity", OPACITY.NODE_DEFAULT)
     .select("rect")
       .style("fill", function (d) {
-        d.color = colorScale(d.type.replace(/ .*/, ""));
+        d.color = "#b3b3b3";//colorScale(d.type.replace(/ .*/, ""));
         return d.color;
       })
       .style("stroke", function (d) { return d3.rgb(colorScale(d.type.replace(/ .*/, ""))).darker(0.1); })
@@ -327,6 +326,10 @@ function update () {
       .attr("height", function (d) { return d.height; })
       .attr("width", biHiSankey.nodeWidth());
 
+  // node.style("fill", function (d) {
+  //       d.color = "#b3b3b3";//colorScale(d.type.replace(/ .*/, ""));
+  //       return d.color;
+  //     });
 
   node.exit()
     .transition()
@@ -394,10 +397,16 @@ function update () {
           .style("opacity", 1).select(".value")
           .text(function () {
             //var additionalInstructions = g.children.length ? "\n(Double click to expand)" : "";
-            return g.name + "\nWeight: " + formatFlow(g.netFlow)
-                +"\n costdown:"+g.costdown
-                +"\n access:"+g.access
-                +"\n stead:"+g.stead
+            var access = g.access>0 ? "Да" : "Нет";
+            return g.name  +"\n"
+                //+ "\nweight: " + formatFlow(g.netFlow)
+
+                +"\n Доступность: "+access
+                +"\n Устойчивость, %: "+g.stead*100
+                +"\n Стоимость простоя, руб./сутки: "+numberWithSpaces(g.costdown)
+                +"\n RTO, ч: ?"
+                +"\n RPO, ч: ?"
+                ;
             ;//+ additionalInstructions;
           });
     }
@@ -509,6 +518,9 @@ function update () {
   collapser.exit().remove();
 
 }
+function numberWithSpaces(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
 
 function httpHttpRequest() {
   var xhttp = new XMLHttpRequest();
@@ -532,15 +544,7 @@ var HttpClient = function() {
     anHttpRequest.send( null );
   }
 }
-// var exampleLinks = [
-//   {"source":"ITResourse1", "target":"or1", "value":Math.floor(0.5 * 100)},
-//   {"source":"ITResourse1", "target":"ITResourse2", "value":Math.floor(1 * 100)},
-//   {"source":"ITResourse2", "target":"ITResourse3", "value":Math.floor(1 * 100)},
-//   {"source":"or1", "target":"and1", "value":Math.floor(0.3 * 100)},
-//   {"source":"and1", "target":"ITService1", "value":Math.floor(1 * 100)},
-//   {"source":"ITService1", "target":"BusinessProcessStep1", "value":Math.floor(1 * 100)},
-//
-//
+
 var exampleNodes = null;
 var exampleLinks = null;
 var URL_Host = 'http://dh.bitc.ru:8021/api/v1';
@@ -596,9 +600,12 @@ function build() {
 
   if (!AUTO_POSITION) {
     exampleNodes.forEach((r, i) => {
-      // if(r.xPOS!=0){
+     //  if(r.xPOS!=0){
+      //   r.color= "#b3b3b3";//colorScale(d.type.replace(/ .*/, ""));
+     // r.style("fill", "#b3b3b3");//colorScale(d.type.replace(/ .*/, ""));
+     // });
       //   r.x = r.xPOS;
-      // }
+     //  }
      // r.height = 70;
       //  r.y = r.yPos;
     });
@@ -615,66 +622,13 @@ function build() {
     });
 
   }
-    update();
+
+ // var node = svg.selectAll("#node");
+ //  node.forEach((r, i) => {
+ //    r.color="#b3b3b3";
+ //    r.textContent="#b3b3b3";
+ //  });
   // }
+  update();
 
 }
-
-//build();
-  //if (this.readyState == 4 && this.status == 200) {
-// var json = httpHttpRequest();
-// var exampleNodes = getArray();
-    var exampleNodes1 =
-        [
-  //{"type":"Asset","id":"a","parent":null,"name":"Assets"},
-  // {"type":"Asset","id":1,"parent":"a","number":"101","name":"Cash"},
-  // {"type":"Asset","id":2,"parent":"a","number":"120","name":"Accounts Receivable"},
-  // {"type":"Asset","id":3,"parent":"a","number":"140","name":"Merchandise Inventory"},
-  // {"type":"Asset","id":4,"parent":"a","number":"150","name":"Supplies"},
-  // {"type":"Asset","id":5,"parent":"a","number":"160","name":"Prepaid Insurance"},
-  // {"type":"Asset","id":6,"parent":"a","number":"170","name":"Land"},
-  // {"type":"Asset","id":7,"parent":"a","number":"175","name":"Buildings"},
-  {"type":"ITResourse","id":"ITResourse1","parent":"null","number":"1","name":"IT-resource 1"},
-  {"type":"ITResourse","id":"ITResourse2","parent":"null","number":"2","name":"IT-resource 2"},
-  {"type":"ITResourse","id":"ITResourse3","parent":"null","number":"3","name":"IT-resource 3"},
-  {"type":"ITResourse","id":"ITResourse4","parent":"null","number":"4","name":"IT-resource 4"},
-
-  {"type":"ITService","id":"ITService1","parent":"null","number":"1","name":"IT-Service 1"},
-  {"type":"ITService","id":"ITService2","parent":"null","number":"2","name":"IT-Service 2"},
-  {"type":"ITService","id":"ITService3","parent":"null","number":"3","name":"IT-Service 3"},
-  {"type":"ITService","id":"ITService4","parent":"null","number":"4","name":"IT-Service 4"},
-
-  {"type":"or","id":"or1","parent":"null","number":"","name":"OR"},
-
-  {"type":"and","id":"and1","parent":"null","number":"","name":"and"},
-  {"type":"and","id":"and2","parent":"null","number":"","name":"and"},
-
-  {"type":"BusinessProcessStep","id":"BusinessProcessStep1","parent":"null","number":"","name":"Business process step 1"},
-  {"type":"BusinessProcessStep","id":"BusinessProcessStep2","parent":"null","number":"","name":"Business process step 2"},
-  {"type":"BusinessProcessStep","id":"BusinessProcessStep3","parent":"null","number":"","name":"Business process step 3"},
-  {"type":"BusinessProcessStep","id":"BusinessProcessStep4","parent":"null","number":"","name":"Business process step 4"}
-
-]
-
-// var exampleLinks = [
-//   {"source":"ITResourse1", "target":"or1", "value":Math.floor(0.5 * 100)},
-//   {"source":"ITResourse1", "target":"ITResourse2", "value":Math.floor(1 * 100)},
-//   {"source":"ITResourse2", "target":"ITResourse3", "value":Math.floor(1 * 100)},
-//   {"source":"or1", "target":"and1", "value":Math.floor(0.3 * 100)},
-//   {"source":"and1", "target":"ITService1", "value":Math.floor(1 * 100)},
-//   {"source":"ITService1", "target":"BusinessProcessStep1", "value":Math.floor(1 * 100)},
-//
-// ]
-
-// biHiSankey
-//   .nodes(exampleNodes)
-//   .links(exampleLinks)
-//   .initializeNodes(function (node) {
-//    // node.state = node.parent ? "contained" : "collapsed";
-//     node.state = "collapsed";
-//   })
-//   .layout(LAYOUT_INTERATIONS);
-//
-// disableUserInterractions(2 * TRANSITION_DURATION);
-//
-// update();
