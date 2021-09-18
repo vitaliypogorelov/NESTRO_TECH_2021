@@ -52,24 +52,8 @@ class GStead:
 
         edge_list = list(nx.edge_bfs(self.G, node_id))  # обход в ширину для узла node
         for u, v in edge_list:  # перебор всех ребер текущего узла
-            # nu_stead = self.G.nodes[u]['stead']  # текущая устойчивость узла u
-            # nu_access = self.G.nodes[u]['access']  # текущая доступность узла u
-            # nv_stead = self.G.nodes[v]['stead']  # текущая устойчивость узла v
-            # nv_access = self.G.nodes[v]['access']  # текущая доступность узла v
-            # weight = self.G[u][v]['weight']  # вес ребра u,v
-            # print(f'before: ({u})--{weight}-->({v}) : ({u})stead={nu_stead} ({v})stead={nv_stead} :'
-            #       f' ({u})access={nu_access} ({v})access={nv_access}')
-
             self._calc_stead(node_id=v)     # расчитываем устойчивость узла на конце ребра
             self._calc_access(node_id=v)    # расчитываем доступность узла на конце ребра
-
-            # nu_stead = self.G.nodes[u]['stead']  # текущая устойчивость узла u
-            # nu_access = self.G.nodes[u]['access']  # текущая доступность узла u
-            # nv_stead = self.G.nodes[v]['stead']  # текущая устойчивость узла v
-            # nv_access = self.G.nodes[v]['access']  # текущая доступность узла v
-            # print(f'after: ({u})--{weight}-->({v}) : ({u})stead={nu_stead} ({v})stead={nv_stead} :'
-            #       f' ({u})access={nu_access} ({v})access={nv_access}')
-            # print()
 
 
     def calc_costdown(self, node_id):
@@ -78,18 +62,13 @@ class GStead:
         lst_out_edges = list(self.G.out_edges(node_id)) # список исходящих ребер
         costdown = 0
         for u, v in lst_out_edges:
-
             if self.G.nodes[v]['type'] == TYPE_OR:
                 costdown += self.G.nodes[v]['costdown'] * self.G[u][v]['weight']  # ИЛИ сумма делится в соответствии с весами
             else:
                 costdown += self.G.nodes[v]['costdown'] # для остальных И сумма равна для всех узлов
 
-            print(f"out_edges: ({u} {self.G.nodes[u]['type']})--{self.G[u][v]['weight']}-->({v} {self.G.nodes[v]['type']}) : ({u})costdown={self.G.nodes[u]['costdown']} ({v})costdown={self.G.nodes[v]['costdown']} :")
-
         if len(lst_out_edges) > 0:    # обновление стоимости простоя текущего узла если у него есть входящие ребра
             self.G.nodes[node_id]['costdown'] = costdown
-
-        print(f"({node_id}) calc_costdown={self.G.nodes[node_id]['costdown']}")
 
         lst_in_edges = list(self.G.in_edges(node_id))  # список входящих ребер
         for u, v in lst_in_edges:   # рекурсивный вызов расчета для узлов входящих ребер
@@ -131,7 +110,3 @@ class GStead:
 
 if __name__ == '__main__':
     pass
-    # gs = GStead()
-    # gs.read_gexf("monstability_model_1.xml")
-    # gs.calc_metrics_stead()
-    # gs.calc_node_stead('2')

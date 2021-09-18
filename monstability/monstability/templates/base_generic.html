@@ -42,8 +42,6 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/model">Модель графа устойчивости</a></li>
                 <li><a class="dropdown-item" href="#">Таблица узлов графа устойчивости</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item disabled" href="#" >О команде</a></li>
               </ul>
             </li>
             {% if user.is_staff %}
@@ -51,6 +49,9 @@
               <a class="nav-link" href="/admin">Панель администратора</a>
             </li>
             {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="/about">О команде</a>
+            </li>
           {% endif %}
           </ul>
           {% if user.is_authenticated %}

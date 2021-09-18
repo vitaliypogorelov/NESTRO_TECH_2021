@@ -11,3 +11,7 @@ def diagram(request):
 def model(request):
     context = {}
     return render(request, 'model.html', context)
+
+def about(request):
+    context = {}
+    return render(request, 'about.html', context)
